@@ -1,0 +1,50 @@
+@layout('layouts.main')
+
+@section('content')
+    <div>
+        <form action="/register" method="POST">
+            <div class="lg:w-1/2 h-screen flex justify-center items-center">
+                <div class="flex justify-center items-stretch w-full mx-2 lg:max-w-md">
+                    <div class="unfocused p-6 rounded-2xl w-full" id="form-container">
+                        <div class="grid grid-cols-1 gap-4 w-full max-w-md">
+                            <h1 class="text-center pb-6 text-5xl font-black text-gradient">Registro</h1>
+                            <div>
+                                <input type="text" name="name" placeholder="Nome"
+                                    class="bg-white border border-transparent rounded-lg w-full p-2.5 focus:ring-purple-500 focus:!border-purple-500 focus:outline-purple-500 focus:border-2 hover:border-pink-500 text-pink-800 font-medium placeholder:text-purple-900">
+                                @if (errors && errors . name)
+                                    <div class="bg-red-600 rounded-lg p-2 text-white font-semibold mt-1">
+                                        {{ errors . name . join(', ') }}
+                                    </div>
+                                @endif
+                            </div>
+
+                            <div>
+                                <input type="email" name="email" placeholder="Email"
+                                    class="bg-white border border-transparent rounded-lg w-full p-2.5 focus:ring-purple-500 focus:!border-purple-500 focus:outline-purple-500 focus:border-2 hover:border-pink-500 text-pink-800 font-medium placeholder:text-purple-900">
+                                @if (errors && errors . email)
+                                    <div class="bg-red-600 rounded-lg p-2 text-white font-semibold mt-1">
+                                        {{ errors . email . join(', ') }}
+                                    </div>
+                                @endif
+                            </div>
+
+                            <div>
+                                <input type="password" name="password" placeholder="Senha"
+                                    class="bg-white border border-transparent rounded-lg w-full p-2.5 focus:ring-purple-500 focus:!border-purple-500 focus:outline-purple-500 focus:border-2 hover:border-pink-500 text-pink-800 font-medium placeholder:text-purple-900">
+                                @if (errors && errors . password)
+                                    <div class="bg-red-600 rounded-lg p-2 text-white font-semibold mt-1">
+                                        {{ errors . password . join(', ') }}
+                                    </div>
+                                @endif
+                            </div>
+                            <button type="submit"
+                                class="w-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 p-3 rounded-lg text-white font-semibold text-lg hover:scale-105 transition ease-out">Cadastrar</button>
+                            <a href="/login" class="w-fit text-white text-lg bg-opacity-custom p-2 rounded-lg hover:border-2 border-white">Já tenho uma conta</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+@endsection

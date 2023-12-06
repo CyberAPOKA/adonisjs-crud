@@ -1,0 +1,46 @@
+@layout('layouts.main')
+
+@section('content')
+    <form action="/login" method="POST">
+        <div class="flex flex-col items-center justify-center lg:flex-row lg:justify-between h-screen">
+            <div class="flex justify-center items-center w-full">
+                <div class="flex justify-center items-stretch w-full mx-2 lg:max-w-md">
+                    <div class="unfocused p-6 rounded-2xl w-full z-10" id="form-container">
+                        <div class="grid grid-cols-1 gap-4 w-full max-w-md">
+                            <h1 class="text-center pb-6 text-5xl font-black text-gradient">Login</h1>
+                            <input type="email" id="email" name="email" placeholder="Email" autocomplete="email"
+                                class="bg-white border border-transparent rounded-lg w-full p-2.5 focus:ring-purple-500 focus:!border-purple-500 focus:outline-purple-500 focus:border-2 hover:border-pink-500 text-pink-800 font-medium placeholder:text-purple-900">
+                            <input type="password" id="password" name="password" placeholder="Senha"
+                                autocomplete="new-password"
+                                class="bg-white border border-transparent rounded-lg w-full p-2.5 focus:ring-purple-500 focus:!border-purple-500 focus:outline-purple-500 focus:border-2 hover:border-pink-500 text-pink-800 font-medium placeholder:text-purple-900">
+
+                            @if (error)
+                                <div class="bg-red-600 rounded-lg p-2 text-white font-semibold">
+                                    {{ error }}
+                                </div>
+                            @endif
+
+                            <a href="/register"
+                                class="w-fit text-white text-lg bg-opacity-custom p-2 rounded-lg hover:border-2 border-white">Registrar-se</a>
+                        </div>
+                    </div>
+                    <button type="submit" id="submit"
+                        class="z-10 border-l border-white unfocused clip-path w-28 md:w-36 lg:w-44 xl:w-62 hidden text-white text-2xl font-bold px-4 items-center justify-center gap-2 lg:gap-4">
+                        <div class="bg-opacity-custom rounded-full p-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="w-12 h-12">
+                                <path stroke-linecap="round" stroke-linejoin="round" class="p-6"
+                                    d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
+                            </svg>
+                        </div>
+                    </button>
+                </div>
+            </div>
+            <div class="w-full h-full absolute lg:!relative">
+                <div class="astronaut w-full h-full ">
+
+                </div>
+            </div>
+        </div>
+    </form>
+@endsection

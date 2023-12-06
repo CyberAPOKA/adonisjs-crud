@@ -118,6 +118,10 @@ export const csrf: ShieldConfig['csrf'] = {
   |
   */
   methods: ['POST', 'PUT', 'PATCH', 'DELETE'],
+  cookieOptions: {
+    httpOnly: true,
+    sameSite: true,
+  },
 }
 
 /*

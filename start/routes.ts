@@ -1,11 +1,14 @@
-import Route from '@ioc:Adonis/Core/Route';
-
-Route.get('/', 'IndexController.index')
+import Route from '@ioc:Adonis/Core/Route'
 
 Route.group(() => {
-  Route.post('register', 'AuthController.register');
-  Route.post('login', 'AuthController.login');
-  Route.post('logout', 'AuthController.logout');
-  Route.post('password/forgot', 'AuthController.forgotPassword');
-  Route.post('password/reset', 'AuthController.resetPassword');
-}).prefix('auth');
+  Route.get('register', 'IndexController.register')
+  Route.get('login', 'IndexController.login').as('login')
+  Route.post('register', 'AuthController.register')
+  Route.post('login', 'AuthController.login')
+})
+
+Route.group(() => {
+  Route.get('logout', 'AuthController.logout')
+  Route.get('/', 'IndexController.index')
+  Route.post('login', 'AuthController.login')
+}).middleware('auth')

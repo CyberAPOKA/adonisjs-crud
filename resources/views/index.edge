@@ -1,12 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    teste
-</body>
-</html>
+@layout('layouts.main')
+
+@section('content')
+    <div class="flex justify-center items-center h-screen">
+        <div class="bg-opacity-custom unfocused p-10 rounded-2xl">
+            <h1 class="text-center pb-6 text-5xl font-black text-gradient">ANOTAÇÕES</h1>
+            <form action="">
+                <input type="email" id="email" name="email" placeholder="Email" autocomplete="email"
+                    class="bg-white border border-transparent rounded-lg w-full p-2.5 focus:ring-purple-500 focus:!border-purple-500 focus:outline-purple-500 focus:border-2 hover:border-pink-500 text-pink-800 font-medium placeholder:text-purple-900">
+            </form>
+        </div>
+    </div>
+@endsection
