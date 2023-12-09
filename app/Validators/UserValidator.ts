@@ -48,7 +48,6 @@ export default class UserValidator {
     'name.maxLength': 'O nome deve ter no máximo 255 caracteres',
     'email.email': 'Informe um endereço de e-mail válido',
     'email.unique': 'Este e-mail já está em uso',
-    // 'password.confirmed': 'As senhas não coincidem',
     'password.minLength': 'A senha deve ter pelo menos 8 caracteres',
   }
 }

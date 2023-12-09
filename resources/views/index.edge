@@ -2,12 +2,100 @@
 
 @section('content')
     <div class="flex justify-center items-center h-screen">
-        <div class="bg-opacity-custom unfocused p-10 rounded-2xl">
+        <div class="bg-opacity-custom unfocused p-4 lg:!p-8 rounded-2xl">
             <h1 class="text-center pb-6 text-5xl font-black text-gradient">ANOTAÇÕES</h1>
-            <form action="">
-                <input type="email" id="email" name="email" placeholder="Email" autocomplete="email"
-                    class="bg-white border border-transparent rounded-lg w-full p-2.5 focus:ring-purple-500 focus:!border-purple-500 focus:outline-purple-500 focus:border-2 hover:border-pink-500 text-pink-800 font-medium placeholder:text-purple-900">
+
+            @if (flashMessages . has('success'))
+                <div class="bg-green-500 rounded-lg p-2 text-white font-semibold">
+                    {{ flashMessages . get('success') }}
+                </div>
+            @endif
+
+            <form action="/create-note" method="POST" enctype="multipart/form-data">
+                <div class="flex flex-col lg:grid lg:grid-cols-2 gap-4">
+                    <div class="lg:col-span-2 flex flex-col">
+                        <label for="description" class="mb-1 ml-2 text-white font-medium text-lg">Descrição</label>
+                        <textarea name="description" id="description" cols="30" rows="5"
+                            placeholder="Digite sobre o que você quer lembrar..."
+                            class="bg-white border border-transparent rounded-lg w-full lg:min-w-[20rem] p-2.5 focus:ring-purple-500 focus:!border-purple-500 focus:outline-purple-500 focus:border-2 hover:border-pink-500 text-pink-800 font-medium placeholder:text-purple-900"></textarea>
+                        @if (flashMessages . has('errors'))
+                            @if (flashMessages . get('errors') . description)
+                                <div class="bg-red-600 rounded-lg p-2 text-white font-semibold mt-1">
+                                    {{ flashMessages . get('errors') . description[0] }}
+                                </div>
+                            @endif
+                        @endif
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="potential" class="mb-1 ml-2 text-white font-medium text-lg">Potencial do negócio</label>
+                        <input type="text" id="potential" name="potential" placeholder="R$ 00,00"
+                            class="bg-white border border-transparent rounded-lg w-full lg:min-w-[20rem] p-2.5 focus:ring-purple-500 focus:!border-purple-500 focus:outline-purple-500 focus:border-2 hover:border-pink-500 text-pink-800 font-medium placeholder:text-purple-900">
+                        @if (flashMessages . has('errors'))
+                            @if (flashMessages . get('errors') . potential)
+                                <div class="bg-red-600 rounded-lg p-2 text-white font-semibold mt-1">
+                                    {{ flashMessages . get('errors') . potential[0] }}
+                                </div>
+                            @endif
+                        @endif
+                    </div>
+
+                    <div class="flex flex-col">
+                        <label for="reminder" class="mb-1 ml-2 text-white font-medium text-lg">Lembrete</label>
+                        <input type="date" id="reminder" name="reminder" placeholder="Seleciona uma data"
+                            class="bg-white border border-transparent rounded-lg w-full lg:min-w-[20rem] p-2.5 focus:ring-purple-500 focus:!border-purple-500 focus:outline-purple-500 focus:border-2 hover:border-pink-500 text-pink-800 font-medium placeholder:text-purple-900">
+                        @if (flashMessages . has('errors'))
+                            @if (flashMessages . get('errors') . reminder)
+                                <div class="bg-red-600 rounded-lg p-2 text-white font-semibold mt-1">
+                                    {{ flashMessages . get('errors') . reminder[0] }}
+                                </div>
+                            @endif
+                        @endif
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="categorization" class="mb-1 ml-2 text-white font-medium text-lg">Categorização</label>
+                        <select name="categorization" id="categorization"
+                            class="bg-white border border-transparent rounded-lg w-full lg:min-w-[20rem] p-2.5 focus:ring-purple-500 focus:!border-purple-500 focus:outline-purple-500 focus:border-2 hover:border-pink-500 text-pink-800 font-medium placeholder:text-purple-900">
+                            <option value="" selected disabled>Clique para selecionar</option>
+                            <option value="Urgente">Urgente</option>
+                            <option value="Importante">Importante</option>
+                            <option value="Média">Média</option>
+                            <option value="Baixa">Baixa</option>
+                            <option value="Rotina">Rotina</option>
+                        </select>
+                        @if (flashMessages . has('errors'))
+                            @if (flashMessages . get('errors') . categorization)
+                                <div class="bg-red-600 rounded-lg p-2 text-white font-semibold mt-1">
+                                    {{ flashMessages . get('errors') . categorization[0] }}
+                                </div>
+                            @endif
+                        @endif
+                    </div>
+                    <div class="flex flex-col justify-end">
+                        <label for="photo" class="mb-1 ml-2 text-white font-medium text-lg">Foto</label>
+                        <input type="file" id="photo" name="photo"
+                            class="hover:cursor-pointer bg-white border border-transparent rounded-lg w-full lg:min-w-[20rem] focus:ring-purple-500 focus:!border-purple-500 focus:outline-purple-500 focus:border-2 hover:border-pink-500 text-pink-800 font-medium placeholder:text-purple-900">
+                        @if (flashMessages . has('errors'))
+                            @if (flashMessages . get('errors') . photo)
+                                <div class="bg-red-600 rounded-lg p-2 text-white font-semibold mt-1">
+                                    {{ flashMessages . get('errors') . photo[0] }}
+                                </div>
+                            @endif
+                        @endif
+                    </div>
+                    <button type="submit"
+                        class="mt-4 col-span-2 w-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 p-3 rounded-lg text-white font-semibold text-lg hover:scale-105 transition ease-out hover:border-2 border-b-cyan-700 border-l-yellow-400 border-teal-400 border-r-lime-500">SALVAR</button>
+                </div>
             </form>
         </div>
     </div>
+    <script>
+        var element = document.getElementById('potential');
+        element.addEventListener('input', function(e) {
+            var value = element.value.replace(/\D/g, '');
+            value = (value / 100).toFixed(2) + '';
+            value = value.replace('.', ',');
+            value = value.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
+            element.value = 'R$ ' + value;
+        });
+    </script>
 @endsection

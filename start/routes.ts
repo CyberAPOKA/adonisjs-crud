@@ -10,5 +10,6 @@ Route.group(() => {
 Route.group(() => {
   Route.get('logout', 'AuthController.logout')
   Route.get('/', 'IndexController.index')
-  Route.post('login', 'AuthController.login')
+  Route.post('create-note', 'NoteController.store')
+  Route.get('minhas-anotacoes', 'NoteController.notes')
 }).middleware('auth')
