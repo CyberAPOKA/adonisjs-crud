@@ -79,7 +79,13 @@ export default class NoteController {
     return response.redirect().back()
   }
 
-  public async notes({ view }: HttpContextContract) {
-    return view.render('notes')
+  public async notes({ request, view }: HttpContextContract) {
+    const page = request.input('page', 1)
+    const limit = 10
+
+    const notes = await Note.query().paginate(page, limit)
+    notes.baseUrl('/notes')
+
+    return view.render('notes', { notes })
   }
 }

@@ -14,7 +14,6 @@ export default class extends BaseSchema {
       table.string('photo_name')
       table.string('photo_path')
       table.timestamps(true, true)
-      
     });
   }
 

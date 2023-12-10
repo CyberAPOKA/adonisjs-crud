@@ -41,3 +41,31 @@ Server.middleware.register([() => import('@ioc:Adonis/Core/BodyParser')])
 Server.middleware.registerNamed({
   auth: 'App/Middleware/Auth',
 })
+
+import View from '@ioc:Adonis/Core/View'
+
+View.global('formatCurrency', (value) => {
+    return `R$ ${parseFloat(value).toFixed(2).replace('.', ',')}`;
+});
+
+View.global('formatDate', (date) => {
+    const newDate = new Date(date);
+    return newDate.toLocaleDateString('pt-BR');
+});
+
+View.global('getBgColor', (categorization) => {
+  switch (categorization) {
+      case 'Urgente':
+          return 'bg-red-600';
+      case 'Importante':
+          return 'bg-orange-500';
+      case 'Média':
+          return 'bg-yellow-400';
+      case 'Baixa':
+          return 'bg-green-600';
+      case 'Rotina':
+          return 'bg-blue-600';
+      default:
+          return '';
+  }
+});
